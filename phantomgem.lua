@@ -38,36 +38,38 @@ local packets = require('packets')
 local res = require('resources')
 
 npcs = {
-    [231] = {name='Trisvain',menuId=892,zone=231},
-    [236] = {name='Raving Opossum',menuId=429,zone=236},
-    [240] = {name='Mimble-Pimble',menuId=895,zone=240},
+    [231] = {name='Trisvain',menuId=892,zone=231}, -- Northern San d'Oria, (J-7)
+    [236] = {name='Raving Opossum',menuId=429,zone=236}, -- Port Bastok, (J-11)
+    [240] = {name='Mimble-Pimble',menuId=895,zone=240}, -- Port Windurst, (L-5) 
 }
 
 pGems = {
-     [0]={ki=2468, cost=10, oi=2},      -- shadow lord
-     [1]={ki=2470, cost=10, oi=258},    -- stellar fulcrum
-     [2]={ki=2469, cost=10, oi=514},    -- celestial nexus
-     [3]={ki=2471, cost=15, oi=770},    -- apathy
-     [4]={ki=2472, cost=15, oi=1026},   -- arrogance
-     [5]={ki=2473, cost=15, oi=1282},   -- envy
-     [6]={ki=2474, cost=15, oi=1538},   -- cowardice
-     [7]={ki=2475, cost=15, oi=1794},   -- rage
-     [8]={ki=2476, cost=20, oi=2050},   -- p. perpetrator
-     [9]={ki=2545, cost=10, oi=2306},   -- savage
-    [10]={ki=2546, cost=10, oi=2562},   -- warrior
-    [11]={ki=2556, cost=10, oi=2818},   -- puppet in peril
-    [12]={ki=2557, cost=10, oi=3074},   -- legacy
-    [13]={ki=2595, cost=10, oi=3330},   -- head wind
-    [14]={ki=2619, cost=10, oi=3586},   -- avatar
-    [15]={ki=2923, cost=10, oi=3842},   -- moonlit
-    [16]={ki=2924, cost=10, oi=4098},   -- waking the beast
-    [17]={ki=2925, cost=10, oi=4354},   -- waking dreams
-    [18]={ki=2987, cost=10, oi=4610},   -- feared one
-    [19]={ki=2988, cost=10, oi=4866},   -- dawn
-    [20]={ki=3185, cost=10, oi=5122},   -- stygian pact
-    [21]={ki=3186, cost=10, oi=5378},   -- champion
-    [22]={ki=3187, cost=10, oi=5634},   -- divine
-    [23]={ki=3188, cost=10, oi=5890},   -- maiden
+     [0]={ki=2468, cost=10, oi=2},      -- Shadow Lord, Shadow Lord phantom gem
+     [1]={ki=2470, cost=10, oi=258},    -- Kam'lanaut, Stellar Fulcrum phantom gem
+     [2]={ki=2469, cost=10, oi=514},    -- Eald'narche, Celestial Nexus phantom gem
+     [3]={ki=2471, cost=15, oi=770},    -- Ark Angel HM, Phantom Gem of Apathy
+     [4]={ki=2472, cost=15, oi=1026},   -- Ark Angel EV, Phantom Gem of Arrogance
+     [5]={ki=2473, cost=15, oi=1282},   -- Ark Angel MR, Phantom Gem of Envy
+     [6]={ki=2474, cost=15, oi=1538},   -- Ark Angel TT, Phantom Gem of Cowardice
+     [7]={ki=2475, cost=15, oi=1794},   -- Ark Angel GK, Phantom Gem of Rage
+     [8]={ki=2476, cost=20, oi=2050},   -- Divine Might, Pentacide Perpetrator Phantom Gem
+     [9]={ki=2545, cost=10, oi=2306},   -- Ouryu, Savage's phantom gem
+    [10]={ki=2546, cost=10, oi=2562},   -- Tenzen, Warrior's Path phantom gem
+    [11]={ki=2556, cost=10, oi=2818},   -- Lancelord Gaheel Ja, Puppet in Peril phantom gem
+    [12]={ki=2557, cost=10, oi=3074},   -- Gessho, Legacy phantom gem
+    [13]={ki=2595, cost=10, oi=3330},   -- Shikaree X, Shikaree Y, and Shikaree Z, Head Wind phantom gem
+    [14]={ki=2619, cost=10, oi=3586},   -- Ifrit Prime/Shiva Prime/Garuda Prime/Titan Prime/Ramuh Prime/Leviathan Prime, Avatar phantom gem 
+    [15]={ki=2923, cost=10, oi=3842},   -- Fenrir, Moonlit Path phantom gem
+    [16]={ki=2924, cost=10, oi=4098},   -- Carbuncle Prime, Waking the beast phantom gem
+    [17]={ki=2925, cost=10, oi=4354},   -- Diabolos, Waking Dreams phantom gem
+    [18]={ki=2987, cost=10, oi=4610},   -- Ultima & Omega, Feared One phantom gem
+    [19]={ki=2988, cost=10, oi=4866},   -- Promathia, Dawn phantom gem
+    [20]={ki=3185, cost=10, oi=5122},   -- Odin Prime, Stygian Pact phantom gem
+    [21]={ki=3186, cost=10, oi=5378},   -- Cait Sith Prime, Champion phantom gem
+    [22]={ki=3187, cost=10, oi=5634},   -- Alexander Prime, Divine phantom gem
+    [23]={ki=3188, cost=10, oi=5890},   -- Lady Lilith, Maiden phantom gem
+    --[24]={ki=3261, cost=30, oi=????},   -- Shinryu, Wyrm God phantom gem  [NYI, needs option index]
+    --[25]={ki=3356, cost=30, oi=????}, -- Cloud of Darkness, Orb of Radiance phantom gem [NYI, needs option index]
 }
 
 shortcuts = {
@@ -140,6 +142,17 @@ shortcuts = {
     ['alex'] = 22,
     ['maiden'] = 23,
     ['lilith'] = 23,
+    -- ['shinryu'] = 24,
+    -- ['shin'] = 24,
+    -- ['wyrm god'] = 24,
+    -- ['wg'] = 24,
+    -- ['cloudofdarkness'] = 25,
+    -- ['cloud'] = 25,
+    -- ['cod'] = 25,
+    -- ['orbsradiance'] = 25,
+    -- ['orbradiance'] = 25,
+    -- ['orb'] = 25,
+
 }
 
 local _gem = nil
