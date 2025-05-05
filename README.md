@@ -15,8 +15,6 @@
 - `//pg reset` will attempt a menu reset in the event you become softlocked, but this is untested.
 
 ### Notes
-- "Wyrm God phantom gem" and "Orb of Radiance phantom gem" purchases are newly added and currently untested, but should work fine.
-
 - You must be within 6 yalms of the NPCs Trisvain, Raving Opossum or Mimble-Pimble for this addon to function.
 
 - See below for the shortcut numbers needed to buy each KI.
