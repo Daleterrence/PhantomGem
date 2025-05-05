@@ -68,8 +68,8 @@ pGems = {
     [21]={ki=3186, cost=10, oi=5378},   -- Cait Sith Prime, Champion phantom gem
     [22]={ki=3187, cost=10, oi=5634},   -- Alexander Prime, Divine phantom gem
     [23]={ki=3188, cost=10, oi=5890},   -- Lady Lilith, Maiden phantom gem
-    --[24]={ki=3261, cost=30, oi=????},   -- Shinryu, Wyrm God phantom gem  [NYI, needs option index]
-    --[25]={ki=3356, cost=30, oi=????}, -- Cloud of Darkness, Orb of Radiance phantom gem [NYI, needs option index]
+    [24]={ki=3261, cost=30, oi=6146},   -- Shinryu, Wyrm God phantom gem [Needs Testing]
+    [25]={ki=3356, cost=30, oi=6402},   -- Cloud of Darkness, Orb of Radiance phantom gem [Needs Testing]
 }
 
 shortcuts = {
@@ -142,16 +142,16 @@ shortcuts = {
     ['alex'] = 22,
     ['maiden'] = 23,
     ['lilith'] = 23,
-    -- ['shinryu'] = 24,
-    -- ['shin'] = 24,
-    -- ['wyrm god'] = 24,
-    -- ['wg'] = 24,
-    -- ['cloudofdarkness'] = 25,
-    -- ['cloud'] = 25,
-    -- ['cod'] = 25,
-    -- ['orbsradiance'] = 25,
-    -- ['orbradiance'] = 25,
-    -- ['orb'] = 25,
+    ['shinryu'] = 24,
+    ['shin'] = 24,
+    ['wyrm god'] = 24,
+    ['wg'] = 24,
+    ['cloudofdarkness'] = 25,
+    ['cloud'] = 25,
+    ['cod'] = 25,
+    ['orbsradiance'] = 25,
+    ['orbradiance'] = 25,
+    ['orb'] = 25,
 
 }
 
