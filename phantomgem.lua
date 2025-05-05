@@ -1,6 +1,6 @@
 --[[
 
-Copyright © 2019, Wiener
+Copyright © 2025, Wiener
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -29,8 +29,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ]]
 
 _addon.name = 'PhantomGem'
-_addon.author = 'Wiener'
-_addon.version = '1.0'
+_addon.author = 'Wiener, updated by DTR'
+_addon.version = '1.1'
 _addon.commands = {'phantomgem', 'pg'}
 
 require('tables')
@@ -68,8 +68,8 @@ pGems = {
     [21]={ki=3186, cost=10, oi=5378},   -- Cait Sith Prime, Champion phantom gem
     [22]={ki=3187, cost=10, oi=5634},   -- Alexander Prime, Divine phantom gem
     [23]={ki=3188, cost=10, oi=5890},   -- Lady Lilith, Maiden phantom gem
-    [24]={ki=3261, cost=30, oi=6146},   -- Shinryu, Wyrm God phantom gem [Needs Testing]
-    [25]={ki=3356, cost=30, oi=6402},   -- Cloud of Darkness, Orb of Radiance phantom gem [Needs Testing]
+    [24]={ki=3261, cost=30, oi=6146},   -- Shinryu, Wyrm God phantom gem 
+    [25]={ki=3356, cost=30, oi=6402},   -- Cloud of Darkness, Orb of Radiance phantom gem
 }
 
 shortcuts = {
@@ -154,7 +154,6 @@ shortcuts = {
     ['orbsradiance'] = 25,
     ['orbradiance'] = 25,
     ['orb'] = 25,
-
 }
 
 local _gem = nil
