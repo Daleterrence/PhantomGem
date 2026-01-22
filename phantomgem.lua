@@ -1,6 +1,6 @@
 --[[
 
-Copyright © 2025, Wiener
+Copyright © 2026, DTR, Wiener,
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
