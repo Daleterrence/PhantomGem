@@ -1,6 +1,6 @@
 --[[
 
-Copyright © 2026, DTR, Wiener,
+Copyright © 2025, Wiener
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -18,7 +18,7 @@ modification, are permitted provided that the following conditions are met:
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY
+DISCLAIMED. IN NO EVENT SHALL Sammeh BE LIABLE FOR ANY
 DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 _addon.name = 'PhantomGem'
 _addon.author = 'Wiener, updated by DTR'
-_addon.version = '1.1'
+_addon.version = '1.2'
 _addon.commands = {'phantomgem', 'pg'}
 
 require('tables')
@@ -154,9 +154,39 @@ shortcuts = {
     ['orbsradiance'] = 25,
     ['orbradiance'] = 25,
     ['orb'] = 25,
+
 }
 
 local _gem = nil
+local _buyAllQueue = {}
+local _buyAllActive = false
+
+function BuyNextInQueue()
+    local info = windower.ffxi.get_info()
+    local npc = npcs[info.zone]
+    if not npc then
+        windower.add_to_chat(10, "No phantom gem NPC in current zone. Stopping.")
+        _buyAllActive = false
+        _buyAllQueue = {}
+        return
+    end
+
+    while #_buyAllQueue > 0 do
+        local nextIdx = table.remove(_buyAllQueue, 1)
+        local gem = pGems[nextIdx]
+        if gem and not HaveKI(gem.ki) then
+            windower.add_to_chat(10, string.format("[%d/%d remaining] Buying: %s",
+                #_buyAllQueue + 1, #_buyAllQueue + 1, res.key_items[gem.ki].en))
+            _gem = gem
+            EngageDialogue(npc)
+            return
+        end
+    end
+
+    windower.add_to_chat(10, "All phantom gems purchased (or already owned). Done!")
+    _buyAllActive = false
+end
+
 windower.register_event('addon command', function(...)
     local info = windower.ffxi.get_info()
     local npc = npcs[info.zone]
@@ -166,6 +196,26 @@ windower.register_event('addon command', function(...)
 
         if cmd == "reset" then
             ResetDialogue(npc, true)
+        elseif cmd == "stop" then
+            _buyAllActive = false
+            _buyAllQueue = {}
+            _gem = nil
+            windower.add_to_chat(10, "Buy-all queue stopped.")
+        elseif cmd == "all" then
+            _buyAllQueue = {}
+            for i = 0, 25 do
+                if pGems[i] and not HaveKI(pGems[i].ki) then
+                    table.insert(_buyAllQueue, i)
+                end
+            end
+            if #_buyAllQueue == 0 then
+                windower.add_to_chat(10, "All phantom gems already owned!")
+            else
+                windower.add_to_chat(10, string.format("Buying %d phantom gems with 5s delay...", #_buyAllQueue))
+                windower.add_to_chat(10, "Use //pg stop to cancel.")
+                _buyAllActive = true
+                BuyNextInQueue()
+            end
         else
             _gem = nil
             local gemNumber = tonumber(cmd)
@@ -247,11 +297,22 @@ windower.register_event('incoming chunk',function(id,data)
             packets.inject(packet)
 
             _gem = nil
+            if _buyAllActive and #_buyAllQueue > 0 then
+                coroutine.schedule(BuyNextInQueue, 5)
+            elseif _buyAllActive then
+                windower.add_to_chat(10, "All phantom gems purchased! Done!")
+                _buyAllActive = false
+            end
             return true
         else
             windower.add_to_chat(10, 'Not enough merits to buy gem!')
             ResetDialogue(npc, false)
             _gem = nil
+            if _buyAllActive then
+                windower.add_to_chat(10, 'Stopping buy-all: insufficient merits.')
+                _buyAllActive = false
+                _buyAllQueue = {}
+            end
             return true
         end
     end
